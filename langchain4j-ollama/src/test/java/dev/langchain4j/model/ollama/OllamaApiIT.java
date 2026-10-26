@@ -2,10 +2,10 @@ package dev.langchain4j.model.ollama;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.time.Duration;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.mockwebserver.Dispatcher;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -31,8 +31,8 @@ class OllamaApiIT {
                         .content(recordedRequest.getRequestUrl().toString())
                         .build();
 
-                OllamaChatResponse ollamaChatResponse =
-                        OllamaChatResponse.builder().message(message).build();
+                OllamaChatResponse ollamaChatResponse = new OllamaChatResponse();
+                ollamaChatResponse.setMessage(message);
 
                 String jsonBody;
                 try {

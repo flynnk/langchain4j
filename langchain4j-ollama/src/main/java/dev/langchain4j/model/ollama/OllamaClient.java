@@ -22,6 +22,10 @@ import static dev.langchain4j.model.ollama.OllamaJsonUtils.toJsonWithoutIdent;
 import static java.lang.Boolean.TRUE;
 import static java.time.Duration.ofSeconds;
 
+import java.time.Duration;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Supplier;
 import dev.langchain4j.http.client.HttpClient;
 import dev.langchain4j.http.client.HttpClientBuilder;
 import dev.langchain4j.http.client.HttpClientBuilderLoader;
@@ -41,11 +45,6 @@ import dev.langchain4j.model.chat.response.ChatResponse;
 import dev.langchain4j.model.chat.response.StreamingChatResponseHandler;
 import dev.langchain4j.model.chat.response.StreamingHandle;
 import dev.langchain4j.model.output.Response;
-import dev.langchain4j.model.output.TokenUsage;
-import java.time.Duration;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
 import org.slf4j.Logger;
 
 class OllamaClient {
@@ -150,7 +149,10 @@ class OllamaClient {
                 if (TRUE.equals(completionResponse.getDone())) {
                     Response<String> response = Response.from(
                             contentBuilder.toString(),
-                            new TokenUsage(completionResponse.getPromptEvalCount(), completionResponse.getEvalCount()));
+                            new OllamaTokenUsage(
+                                    completionResponse.getPromptEvalCount(),
+                                    completionResponse.getEvalCount(),
+                                    completionResponse.getPromptEvalCachedCount()));
                     handler.onComplete(response);
                 }
             }

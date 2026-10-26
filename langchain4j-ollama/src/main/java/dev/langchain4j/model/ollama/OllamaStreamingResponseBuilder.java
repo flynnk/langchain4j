@@ -47,7 +47,10 @@ class OllamaStreamingResponseBuilder {
         }
 
         if (partialResponse.getEvalCount() != null && partialResponse.getPromptEvalCount() != null) {
-            this.tokenUsage = new TokenUsage(partialResponse.getPromptEvalCount(), partialResponse.getEvalCount());
+            this.tokenUsage = new OllamaTokenUsage(
+                    partialResponse.getPromptEvalCount(),
+                    partialResponse.getEvalCount(),
+                    partialResponse.getPromptEvalCachedCount());
         }
 
         Message message = partialResponse.getMessage();

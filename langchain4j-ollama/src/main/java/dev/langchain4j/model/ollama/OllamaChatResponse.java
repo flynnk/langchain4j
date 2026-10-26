@@ -16,6 +16,8 @@ class OllamaChatResponse {
     private Boolean done;
     private Integer promptEvalCount;
     private Integer evalCount;
+    private Integer promptEvalCachedCount;
+
     private String error;
 
     OllamaChatResponse() {}
@@ -27,6 +29,7 @@ class OllamaChatResponse {
             String doneReason,
             Boolean done,
             Integer promptEvalCount,
+            Integer promptEvalCachedCount,
             Integer evalCount,
             String error) {
         this.model = model;
@@ -37,10 +40,7 @@ class OllamaChatResponse {
         this.promptEvalCount = promptEvalCount;
         this.evalCount = evalCount;
         this.error = error;
-    }
-
-    static Builder builder() {
-        return new Builder();
+        this.promptEvalCachedCount = promptEvalCachedCount;
     }
 
     public String getModel() {
@@ -99,68 +99,19 @@ class OllamaChatResponse {
         this.evalCount = evalCount;
     }
 
+    public Integer getPromptEvalCachedCount() {
+        return promptEvalCachedCount;
+    }
+
+    public void setPromptEvalCachedCount(final Integer promptEvalCachedCount) {
+        this.promptEvalCachedCount = promptEvalCachedCount;
+    }
+
     public String getError() {
         return error;
     }
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    static class Builder {
-
-        private String model;
-        private String createdAt;
-        private Message message;
-        private String doneReason;
-        private Boolean done;
-        private Integer promptEvalCount;
-        private Integer evalCount;
-        private String error;
-
-        Builder model(String model) {
-            this.model = model;
-            return this;
-        }
-
-        Builder createdAt(String createdAt) {
-            this.createdAt = createdAt;
-            return this;
-        }
-
-        Builder message(Message message) {
-            this.message = message;
-            return this;
-        }
-
-        Builder doneReason(String doneReason) {
-            this.doneReason = doneReason;
-            return this;
-        }
-
-        Builder done(Boolean done) {
-            this.done = done;
-            return this;
-        }
-
-        Builder promptEvalCount(Integer promptEvalCount) {
-            this.promptEvalCount = promptEvalCount;
-            return this;
-        }
-
-        Builder evalCount(Integer evalCount) {
-            this.evalCount = evalCount;
-            return this;
-        }
-
-        Builder error(String error) {
-            this.error = error;
-            return this;
-        }
-
-        OllamaChatResponse build() {
-            return new OllamaChatResponse(
-                    model, createdAt, message, doneReason, done, promptEvalCount, evalCount, error);
-        }
     }
 }

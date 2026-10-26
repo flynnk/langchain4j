@@ -16,6 +16,7 @@ class CompletionResponse {
     private Boolean done;
     private Integer promptEvalCount;
     private Integer evalCount;
+    private Integer promptEvalCachedCount;
     private String error;
 
     CompletionResponse() {}
@@ -27,6 +28,7 @@ class CompletionResponse {
             String image,
             Boolean done,
             Integer promptEvalCount,
+            Integer promptEvalCachedCount,
             Integer evalCount,
             String error) {
         this.model = model;
@@ -35,6 +37,7 @@ class CompletionResponse {
         this.image = image;
         this.done = done;
         this.promptEvalCount = promptEvalCount;
+        this.promptEvalCachedCount = promptEvalCachedCount;
         this.evalCount = evalCount;
         this.error = error;
     }
@@ -95,67 +98,19 @@ class CompletionResponse {
         this.evalCount = evalCount;
     }
 
+    public Integer getPromptEvalCachedCount() {
+        return promptEvalCachedCount;
+    }
+
+    public void setPromptEvalCachedCount(final Integer promptEvalCachedCount) {
+        this.promptEvalCachedCount = promptEvalCachedCount;
+    }
+
     public String getError() {
         return error;
     }
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    static class Builder {
-
-        private String model;
-        private String createdAt;
-        private String response;
-        private String image;
-        private Boolean done;
-        private Integer promptEvalCount;
-        private Integer evalCount;
-        private String error;
-
-        Builder model(String model) {
-            this.model = model;
-            return this;
-        }
-
-        Builder createdAt(String createdAt) {
-            this.createdAt = createdAt;
-            return this;
-        }
-
-        Builder response(String response) {
-            this.response = response;
-            return this;
-        }
-
-        Builder image(String image) {
-            this.image = image;
-            return this;
-        }
-
-        Builder done(Boolean done) {
-            this.done = done;
-            return this;
-        }
-
-        Builder promptEvalCount(Integer promptEvalCount) {
-            this.promptEvalCount = promptEvalCount;
-            return this;
-        }
-
-        Builder evalCount(Integer evalCount) {
-            this.evalCount = evalCount;
-            return this;
-        }
-
-        Builder error(String error) {
-            this.error = error;
-            return this;
-        }
-
-        CompletionResponse build() {
-            return new CompletionResponse(model, createdAt, response, image, done, promptEvalCount, evalCount, error);
-        }
     }
 }
